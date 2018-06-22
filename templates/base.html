@@ -84,17 +84,30 @@
                         <ul>
                             <li><a href="/index">Home</a></li>
                             <li><a href="/destination">Destination</a></li>
-                            <li class="has-dropdown">
-                                <a href="#">Travel</a>
-                                <ul class="dropdown">
-                                    <li><a href="#">Alexandria</a></li>
-                                    <li><a href="#">Luxor</a></li>
-                                </ul>
-                            </li>
+                            
                             <li><a href="/gallery">Gallery</a></li>
-                            <li><a href="/pricing">FAQ</a></li>
-                            <li><a href="/contact">Contact</a></li>
+                            {%if session['id']  %}
+                            <li><a href="/offerspage">Offers</a></li>
+                            {% endif %}
+                      
+                            <li><a href="/faq">FAQ</a></li>
+                            
+                            <li><a href="/contactWeb">Contact</a></li>
+                            {% if not session['id'] %}
                             <li><a style="cursor: pointer;" id="showform" data-toggle="modal" data-target="#login_signup">Login</a></li>
+                            {% else %}
+                            {% if session['type'] == "0" %}
+                            <li><a href="{{url_for('uploadDetails')}}">Panel</a></li>
+                       
+                                    {% endif %}
+
+                            <li>
+                            <a >Hi ! {{session['fn']}} {{session['ln']}} </a></li>
+                            <a></li>
+                                
+
+                                <li><a href="{{url_for('logout')}}">Logout</a></li>
+                                {% endif %}
                         </ul>
                     </div>
                 </div>
@@ -122,28 +135,30 @@
                         <div id="signup">
                             <h1>Sign Up for Free</h1>
 
-                            <form action="/" method="post">
+                            <form action="{{url_for('signup')}}" method="post">
 
                                 <div class="top-row">
                                     <div class="field-wrap">
                                         <label>First Name<span class="req">*</span></label>
-                                        <input type="text" required autocomplete="off" />
+                                        <input type="text" name ="fn" required autocomplete="off" />
                                     </div>
 
                                     <div class="field-wrap">
                                         <label>Last Name<span class="req">*</span> </label>
-                                        <input type="text" required autocomplete="off" />
+                                        <input type="text" name="ln" required autocomplete="off" />
                                     </div>
                                 </div>
+                        
+
 
                                 <div class="field-wrap">
                                     <label>Email Address<span class="req">*</span></label>
-                                    <input type="email" required autocomplete="off" />
+                                    <input type="email" name="email" required autocomplete="off" />
                                 </div>
 
                                 <div class="field-wrap">
                                     <label> Set A Password<span class="req">*</span></label>
-                                    <input type="password" required autocomplete="off" />
+                                    <input type="password" name ="password" required autocomplete="off" />
                                 </div>
 
                                 <button type="submit" class="button button-block" />Sign UP</button>
@@ -155,16 +170,16 @@
                         <div id="login">
                             <h1>Welcome Back!</h1>
 
-                            <form action="/" method="post">
+                            <form action="{{url_for('login')}}" method="post">
 
                                 <div class="field-wrap">
                                     <label>Email Address<span class="req">*</span></label>
-                                    <input type="email" required autocomplete="off" />
+                                    <input type="email" name ="email" required autocomplete="off" />
                                 </div>
 
                                 <div class="field-wrap">
                                     <label>Password<span class="req">*</span></label>
-                                    <input type="password" required autocomplete="off" />
+                                    <input type="password" name = "password" required autocomplete="off" />
                                 </div>
 
                                 <!-- <p class="forgot"><a href="#">Forgot Password?</a></p> -->

@@ -24,33 +24,37 @@
                 <h2>Trip With Your Favourite Destination</h2>
             </div>
         </div>
+        {% if places %} {% for place in places %}
+        {% if place.id %2 != 0%}
         <div class="row">
+        {% endif %}
             <div class="col-lg-6 col-md-6 col-sm-6">
-                <a href="{{url_for('static', filename='images/egypt-alexandria-corniche.jpg')}}" class="fh5co-card-item image-popup">
+                <a href="/static/images/{{place.photo}}" class="fh5co-card-item image-popup">
                     <figure>
                         <div class="overlay"><i class="ti-plus"></i></div>
-                        <img src="{{url_for('static', filename='images/egypt-alexandria-corniche.jpg')}}" alt="Image" class="img-responsive">
+                       <img src="/static/images/{{place.photo}}" alt="Image" class="img-responsive">
                     </figure>
                     <div class="fh5co-text">
+                            {% if place.destination ==2 %}
+
                         <h2>Alexandria</h2>
-                        <p>Alexandria is a Mediterranean port city in Egypt. During the Hellenistic period, it was home to a lighthouse ranking among the Seven Wonders of the Ancient World as well as a storied library..</p>
-                        <p><span class="btn btn-primary">Schedule a Trip</span></p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <a href="{{url_for('static', filename='images/mainluxor.jpg')}}" class="fh5co-card-item image-popup">
-                    <figure>
-                        <div class="overlay"><i class="ti-plus"></i></div>
-                        <img src="{{url_for('static', filename='images/mainluxor.jpg')}}" alt="Image" class="img-responsive">
-                    </figure>
-                    <div class="fh5co-text">
+                            {%endif%}
+                        {% if place.destination == 1 %}
+
                         <h2>Luxor</h2>
-                        <p>Luxor is a city on the east bank of the Nile River in southern Egypt. It's on the site of ancient Thebes, the pharaohs’ capital at the height of their power, during the 16th–11th centuries B.C ..</p>
-                        <p><span class="btn btn-primary">Schedule a Trip</span></p>
+                        {%endif%}
+                        <p>{{place.description}}</p>
+                        <p><span class="btn btn-primary">View</span></p>
                     </div>
                 </a>
             </div>
+
+            {% if place.id %2 == 0%}
+                     </div>
+            {% endif %}
+
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
 

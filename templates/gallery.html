@@ -8,7 +8,7 @@
                 <div class="row row-mt-15em">
 
                     <div class="col-md-12 mt-text animate-box" data-animate-effect="fadeInUp">
-                        <h1>Gallery</h1>
+                        <h1>Gallery Of Alexandria</h1>
                     </div>
 
                 </div>
@@ -22,58 +22,65 @@
 <div class="gtco-section">
     <div class="gtco-container">
         <div class="row">
-            <div class="col-lg-6 col-md-4 col-sm-4">
+                {% if places %} {% for place in places %}
+                {% if place.destination ==2 %} 
+                <div class="col-lg-6 col-md-4 col-sm-4">
+    
+                    <a href="/static/images/{{place.photo}}" class="fh5co-card-item image-popup">
+                        <figure>
+                            <div class="overlay"><i class="ti-plus"></i></div>
+                            <img src="/static/images/{{place.photo}}" alt="Image" class="img-responsive">
+                        </figure>
+                    </a>
+                </div>
+                {% endif %}
+                {% endfor %}
+            {% endif %}
 
-                <a href="{{url_for('static', filename='images/4-10.jpg')}}" class="fh5co-card-item image-popup">
-                    <figure>
-                        <div class="overlay"><i class="ti-plus"></i></div>
-                        <img src="{{url_for('static', filename='images/4-10.jpg')}}" alt="Image" class="img-responsive">
-                    </figure>
-                </a>
-            </div>
-            <div class="col-lg-6 col-md-4 col-sm-4">
-                <a href="{{url_for('static', filename='images/egypt-alexandria-corniche.jpg')}}" class="fh5co-card-item image-popup">
-                    <figure>
-                        <div class="overlay"><i class="ti-plus"></i></div>
-                        <img src="{{url_for('static', filename='images/egypt-alexandria-corniche.jpg')}}" alt="Image" class="img-responsive">
-                    </figure>
-                </a>
-            </div>
-            <div class="col-lg-6 col-md-4 col-sm-4">
-
-                <a href="{{url_for('static', filename='images/13_Biblioteca_de_AlejandrC3ADa.jpg')}}" class="fh5co-card-item image-popup">
-                    <figure>
-                        <div class="overlay"><i class="ti-plus"></i></div>
-                        <img src="{{url_for('static', filename='images/13_Biblioteca_de_AlejandrC3ADa.jpg')}}" alt="Image" class="img-responsive">
-                    </figure>
-                </a>
-            </div>
-            <div class="col-lg-6 col-md-4 col-sm-4">
-
-                <a href="{{url_for('static', filename='images/mainluxor.jpg')}}" class="fh5co-card-item image-popup">
-                    <figure>
-                        <div class="overlay"><i class="ti-plus"></i></div>
-                        <img src="{{url_for('static', filename='images/mainluxor.jpg')}}" alt="Image" class="img-responsive">
-                    </figure>
-                </a>
-            </div>
-            <div class="col-lg-6 col-md-4 col-sm-4">
-                <a href="{{url_for('static', filename='images/luxor_cnt_30mar10_iStock_b1.jpg')}}" class="fh5co-card-item image-popup">
-                    <figure>
-                        <div class="overlay"><i class="ti-plus"></i></div>
-                        <img src="{{url_for('static', filename='images/luxor_cnt_30mar10_iStock_b1.jpg')}}" alt="Image" class="img-responsive">
-                    </figure>
-                </a>
-            </div>
-            <div class="col-lg-6 col-md-4 col-sm-4">
-
-                <a href=" {{url_for('static', filename='images/egypt-luxor-temple-of-deir-al-bahri.jpg')}}" class="fh5co-card-item image-popup">
-                    <figure>
-                        <div class="overlay"><i class="ti-plus"></i></div>
-                        <img src=" {{url_for('static', filename='images/egypt-luxor-temple-of-deir-al-bahri.jpg')}}" alt="Image" class="img-responsive">
-                    </figure>
-                </a>
             </div>
         </div>
     </div>
+
+
+
+    <header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(static/images/img_6.jpg)">
+        <div class="overlay"></div>
+        <div class="gtco-container">
+            <div class="row">
+                <div class="col-md-12 col-md-offset-0 text-center">
+                    <div class="row row-mt-15em">
+    
+                        <div class="col-md-12 mt-text animate-box" data-animate-effect="fadeInUp">
+                            <h1>Gallery Of Luxor</h1>
+                        </div>
+    
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    
+    <div class="gtco-section">
+        <div class="gtco-container">
+            <div class="row">
+                    {% if places %} {% for place in places %}
+                    {% if place.destination ==1 %} 
+                <div class="col-lg-6 col-md-4 col-sm-4">
+    
+      
+                        <a href="/static/images/{{place.photo}}" class="fh5co-card-item image-popup">
+                            <figure>
+                                <div class="overlay"><i class="ti-plus"></i></div>
+                                <img src="/static/images/{{place.photo}}" alt="Image" class="img-responsive">
+                            </figure>
+                        </a>
+                </div>
+                {% endif %}
+                {% endfor %}
+            {% endif %}
+                </div>
+            </div>
+        </div>
     {% endblock %}

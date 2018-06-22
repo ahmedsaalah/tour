@@ -1,0 +1,63 @@
+{% extends "base.html" %} {% block content %}
+
+<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(static/images/img_6.jpg)">
+    <div class="overlay"></div>
+    <div class="gtco-container">
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <div class="row row-mt-15em">
+
+                    <div class="col-md-12 mt-text animate-box" data-animate-effect="fadeInUp">
+                        <h1>Admin Panel</h1>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div class="gtco-section">
+    <div class="gtco-container">
+       
+
+
+        <form action="{{url_for('uploadDetails')}}" accept="image/gif,image/jpeg" enctype="multipart/form-data" method="post">
+
+  
+
+            <div class="field-wrap">
+                <div class="input-field col s12">
+                    <select name ="destination">
+                      <option value="" disabled selected>Choose the destination</option>
+                      <option value="1">Luxor</option>
+                      <option value="2">Alexandria</option>
+                  
+                    </select>
+              
+                  </div>
+
+
+            </div>
+
+            <div class="field-wrap">
+         
+                <textarea type="text" name ="description" placeholder="Description" required autocomplete="off" ></textarea>
+            </div>
+            <div class="field-wrap">
+                
+                <input type="file" name="file" id="file">
+            </div>
+           
+
+            <button type="submit" class="button button-block" />Submit</button>
+
+        </form>
+
+
+
+        </div>
+    </div>
+    {% endblock %}
