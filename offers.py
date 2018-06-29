@@ -2,7 +2,7 @@ from importall import *
 class offer(db.Model):
    id = db.Column('offer_id', db.Integer, primary_key = True)
    destination = db.Column(db.Integer)
-   description = db.Column(db.String(300)) 
+   description = db.Column(db.String(900)) 
 
    price = db.Column(db.String(200))
 

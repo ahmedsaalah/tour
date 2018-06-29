@@ -5,7 +5,10 @@ from werkzeug.utils import secure_filename
 from contacts import contact
 from places import place
 from offers import offer
+from comments import comment
+from plans import plan 
 import os
+from pprint import pprint
 #upload_file
 UPLOAD_FOLDER = 'static/images'
 ALLOWED_EXTENSIONS = set(['txt', 'png', 'jpg', 'jpeg', 'gif'])
@@ -157,11 +160,22 @@ def uploadDetails():
 ####
 @app.route('/gallery')
 def gallery():
-    places = place.query.filter_by().all()
+    places = place.query.filter_by().all()                                                    
+    comments = comment.query.filter_by().all()
+
     """ returns gallery page """
-    return render_template('gallery.html',places=places)
+    return render_template('gallery.html',places=places ,comments =comments)
 ####
 ####
+@app.route('/plans')
+def plans():
+
+
+
+    plans = plan.query.filter_by(user_id=login_session[id]).all()
+    """ returns destination page """
+    return render_template('plans.html',plans=plans)
+
 @app.route('/destination')
 def destination():
 
@@ -224,6 +238,56 @@ def charge():
 
     
     return redirect(url_for('offerspage'))
+
+@app.route('/commentFun', methods=['POST','GET'])
+def commentFun():
+    if request.method == 'POST' :
+    
+        comments =request.form["comments"]
+        placeId =request.form["placeId"]
+        if 'fn' in login_session :
+            name =login_session['fn'] + " "+login_session['ln']
+        else :
+            name ="anon"
+                    
+        newComment = comment(name=name ,comment=comments, placeId =placeId )
+
+        db.session.add(newComment)
+        db.session.commit()
+    
+        return redirect(url_for('gallery'))
+
+@app.route('/rateFun', methods=['POST','GET'])
+def rateFun():
+    if request.method == 'POST' :
+        placeId =request.form["placeId"]
+        rate =request.form["rate"]
+        placeObj = place.query.filter_by(id = placeId).all()[0]
+
+        placeObj.count += 1 
+        placeObj.star += int(rate)
+        
+        db.session.commit()  
+    return redirect(url_for('gallery'))
+@app.route('/planFun', methods=['POST','GET'])
+def planFun():
+    if request.method == 'POST' :
+        activities =request.form["activities"]
+        destination =request.form["destination"]
+        date =request.form["date"]
+        user_id= login_session['id']
+
+        
+        newPlan = plan(activities=activities ,destination=destination, date =date ,user_id=user_id)
+
+        db.session.add(newPlan)
+        db.session.commit()
+    
+        return redirect(url_for('plans'))
+
+
+
+
 
 if __name__ == '__main__':
     app.secret_key = 'A0Zr98j/3yX R~XHH!jJHDmN]LWX/,?RT'

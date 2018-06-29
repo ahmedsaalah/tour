@@ -24,7 +24,7 @@
         <div class="row">
                 {% if places %} {% for place in places %}
                 {% if place.destination ==2 %} 
-                <div class="col-lg-6 col-md-4 col-sm-4">
+                <div class="col-lg-6 col-md-4 col-sm-6">
     
                     <a href="/static/images/{{place.photo}}" class="fh5co-card-item image-popup">
                         <figure>
@@ -32,11 +32,54 @@
                             <img src="/static/images/{{place.photo}}" alt="Image" class="img-responsive">
                         </figure>
                     </a>
-                </div>
-                {% endif %}
-                {% endfor %}
-            {% endif %}
+    <!-- <input data-role="rating" data-value="{{place.star/place.count}}" readonly    
+    > -->
+    <div class="my-rating-4" data-rating="2.5"></div>
+                        
+                    {% if comments %}
+                        
 
+                    {% for comment in comments %}
+                    
+            
+                    {% if place.id == comment.placeId %}
+
+
+                    <div style="background:#eee;font-family:sans-serif;">
+                            {{comment.comment}}  - by {{comment.name}}
+                    
+                            </div>
+                            {%endif%} 
+                    {%endfor%}
+                    {%endif%}
+<form action="{{url_for('commentFun')}}" method="post">
+    
+<div>
+<input type="hidden" name ="placeId" value="{{place.id}}">
+<textarea name="comments"  style="font-family:sans-serif;font-size:1.2em;">
+Hey... say something!
+</textarea>
+</div>
+<input type="submit" value="Submit">
+</form>
+<form action="{{url_for('rateFun')}}" method="post">
+        <input type="hidden" name ="placeId" value="{{place.id}}">
+        <div class="container">
+           
+                <div class="row lead">
+                    <div id="hearts" value ="{{place.id}}" class="starrr"></div>
+              <input type="text" id="count{{place.id}}">
+                </div>
+
+            </div>
+
+
+<input type="submit" value="Submit">
+  </form>  
+            </div>
+            {% endif %}
+            {% endfor %}
+        {% endif %}
             </div>
         </div>
     </div>
@@ -67,7 +110,7 @@
             <div class="row">
                     {% if places %} {% for place in places %}
                     {% if place.destination ==1 %} 
-                <div class="col-lg-6 col-md-4 col-sm-4">
+                <div class="col-lg-6 col-md-4 col-sm-6">
     
       
                         <a href="/static/images/{{place.photo}}" class="fh5co-card-item image-popup">
@@ -76,6 +119,32 @@
                                 <img src="/static/images/{{place.photo}}" alt="Image" class="img-responsive">
                             </figure>
                         </a>
+                        {% if comments %}
+                        
+
+                        {% for comment in comments %}
+                        
+                
+                        {% if place.id == comment.placeId %}
+                       
+                        <div style="background:#eee;font-family:sans-serif;">
+                                {{comment.comment}}  - by {{comment.name}}
+                        
+                                </div>
+                                {%endif%} 
+                        {%endfor%}
+                        {%endif%}
+<form action="{{url_for('commentFun')}}" method="post">
+    <div>
+    <input type="hidden" name ="placeId" value="{{place.id}}">
+    <textarea name="comments"  style="font-family:sans-serif;font-size:1.2em;">
+    Hey... say something!
+    </textarea>
+    </div>
+    <input type="submit" value="Submit">
+    </form>
+
+
                 </div>
                 {% endif %}
                 {% endfor %}
@@ -83,4 +152,12 @@
                 </div>
             </div>
         </div>
+
+        <!-- <style>
+                body {
+                    background-color: #003566;
+                }
+                </style> -->
+      
+
     {% endblock %}
